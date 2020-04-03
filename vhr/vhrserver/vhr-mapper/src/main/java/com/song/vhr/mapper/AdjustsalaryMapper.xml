@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.song.vhr.mapper.AdjustsalaryMapper">
+  <resultMap id="BaseResultMap" type="com.song.vhr.model.Adjustsalary">
+    <!--@mbg.generated-->
+    <!--@Table adjustsalary-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="eid" jdbcType="INTEGER" property="eid" />
+    <result column="asDate" jdbcType="DATE" property="asdate" />
+    <result column="beforeSalary" jdbcType="VARCHAR" property="beforesalary" />
+    <result column="afterSalary" jdbcType="VARCHAR" property="aftersalary" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, eid, asDate, beforeSalary, afterSalary, reason, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from adjustsalary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from adjustsalary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.song.vhr.model.Adjustsalary" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into adjustsalary (eid, asDate, beforeSalary, 
+      afterSalary, reason, remark
+      )
+    values (#{eid,jdbcType=INTEGER}, #{asdate,jdbcType=DATE}, #{beforesalary,jdbcType=VARCHAR},
+      #{aftersalary,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.song.vhr.model.Adjustsalary" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into adjustsalary
+      (eid,
+        asDate,
+        beforeSalary,
+        afterSalary,
+        reason,
+        remark)values (#{eid},#{asdate},#{beforesalary},#{aftersalary},#{reason},#{remark})
+
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.song.vhr.model.Adjustsalary">
+    <!--@mbg.generated-->
+    update adjustsalary
+    <set>
+      <if test="eid != null">
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="asdate != null">
+        asDate = #{asdate,jdbcType=DATE},
+      </if>
+      <if test="beforesalary != null">
+        beforeSalary = #{beforesalary,jdbcType=VARCHAR},
+      </if>
+      <if test="aftersalary != null">
+        afterSalary = #{aftersalary,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.song.vhr.model.Adjustsalary">
+    <!--@mbg.generated-->
+    update adjustsalary
+    set eid = #{eid,jdbcType=INTEGER},
+      asDate = #{asdate,jdbcType=DATE},
+      beforeSalary = #{beforesalary,jdbcType=VARCHAR},
+      afterSalary = #{aftersalary,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <resultMap id="AdEmpSalary" extends="BaseResultMap" type="com.song.vhr.model.Adjustsalary">
+        <association property="employee" javaType="com.song.vhr.model.Employee">
+            <id column="eid" property="id"/>
+            <result column="name" property="name"/>
+            <result column="idCard" property="idcard"/>
+            <result column="phone" property="phone"/>
+        </association>
+        <association property="salary" javaType="com.song.vhr.model.Salary">
+            <result column="basicSalary" property="basicSalary"/>
+        </association>
+    </resultMap>
+    <select id="getAlladjustsalary" resultMap="AdEmpSalary">
+        SELECT ad.id,e.id eid,e.idCard idcard,e.phone phone, e.`name` name,s.basicSalary basicSalary,ad.beforeSalary,ad.afterSalary,ad.asDate,ad.reason,ad.remark FROM
+        `adjustsalary` ad,employee e LEFT JOIN empsalary es on es.eid=e.id LEFT JOIN salary s on  es.sid=s.id where ad.eid=e.id
+        <if test="keywords != null and keywords != ''">
+        and e.name like concat('%',#{keywords},'%')
+      </if>
+    </select>
+</mapper>

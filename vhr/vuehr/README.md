@@ -1,0 +1,5 @@
+数据加载成功之后，在前端可以有几个存放数据的地方
+
+sessionStorage
+localStorage
+vuex

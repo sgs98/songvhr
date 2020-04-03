@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="javaMapperPackage" value="com.song.vhr.mapper" />
+        <option name="javaMapperPath" value="D:\vhr\vhr\vhrserver\vhr-mapper\src\main\java" />
+        <option name="javaModelPackage" value="com.song.vhr.model" />
+        <option name="javaModelPath" value="D:\vhr\vhr\vhrserver\vhr-model\src\main\java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="vhr-web" />
+        <option name="moduleNameToPackageAndPathMap">
+          <map>
+            <entry key="vhr-web">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.song.vhr.mapper" />
+                  <option name="javaMapperPath" value="D:\vhr\vhr\vhrserver\vhr-mapper\src\main\java" />
+                  <option name="javaModelPacakge" value="com.song.vhr.model" />
+                  <option name="javaModelPath" value="D:\vhr\vhr\vhrserver\vhr-model\src\main\java" />
+                  <option name="xmlPackage" value="com.song.vhr.mapper" />
+                  <option name="xmlPath" value="D:\vhr\vhr\vhrserver\vhr-mapper\src\main\java" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="tableGenerateConfigs">
+          <map>
+            <entry key="vhr:adjustsalary">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="Adjustsalary" />
+                  <option name="moduleName" value="vhr-web" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="vhr:employeeremove">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="Employeeremove" />
+                  <option name="moduleName" value="vhr-web" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="vhr:employeetrain">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="Employeetrain" />
+                  <option name="moduleName" value="vhr-web" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="vhr:empsalary">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="Empsalary" />
+                  <option name="moduleName" value="vhr-web" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="vhr:salary">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="javaModelName" value="Salary" />
+                  <option name="moduleName" value="vhr-web" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="xmlMapperPackage" value="com.song.vhr.mapper" />
+        <option name="xmlMapperPath" value="D:\vhr\vhr\vhrserver\vhr-mapper\src\main\java" />
+      </ProjectProfile>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.song.vhr.mapper.EmployeeremoveMapper">
+  <resultMap id="BaseResultMap" type="com.song.vhr.model.Employeeremove">
+    <!--@mbg.generated-->
+    <!--@Table employeeremove-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="eid" jdbcType="INTEGER" property="eid" />
+    <result column="afterDepId" jdbcType="INTEGER" property="afterdepid" />
+    <result column="afterJobId" jdbcType="INTEGER" property="afterjobid" />
+    <result column="removeDate" jdbcType="DATE" property="removedate" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, eid, afterDepId, afterJobId, removeDate, reason, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from employeeremove
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from employeeremove
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.song.vhr.model.Employeeremove" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into employeeremove (eid, afterDepId, afterJobId, 
+      removeDate, reason, remark
+      )
+    values (#{eid,jdbcType=INTEGER}, #{afterdepid,jdbcType=INTEGER}, #{afterjobid,jdbcType=INTEGER}, 
+      #{removedate,jdbcType=DATE}, #{reason,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.song.vhr.model.Employeeremove" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into employeeremove
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="afterdepid != null">
+        afterDepId,
+      </if>
+      <if test="afterjobid != null">
+        afterJobId,
+      </if>
+      <if test="removedate != null">
+        removeDate,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="afterdepid != null">
+        #{afterdepid,jdbcType=INTEGER},
+      </if>
+      <if test="afterjobid != null">
+        #{afterjobid,jdbcType=INTEGER},
+      </if>
+      <if test="removedate != null">
+        #{removedate,jdbcType=DATE},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.song.vhr.model.Employeeremove">
+    <!--@mbg.generated-->
+    update employeeremove
+    <set>
+      <if test="eid != null">
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="afterdepid != null">
+        afterDepId = #{afterdepid,jdbcType=INTEGER},
+      </if>
+      <if test="afterjobid != null">
+        afterJobId = #{afterjobid,jdbcType=INTEGER},
+      </if>
+      <if test="removedate != null">
+        removeDate = #{removedate,jdbcType=DATE},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.song.vhr.model.Employeeremove">
+    <!--@mbg.generated-->
+    update employeeremove
+    set eid = #{eid,jdbcType=INTEGER},
+      afterDepId = #{afterdepid,jdbcType=INTEGER},
+      afterJobId = #{afterjobid,jdbcType=INTEGER},
+      removeDate = #{removedate,jdbcType=DATE},
+      reason = #{reason,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <resultMap id="EmpDeptJob"  extends="BaseResultMap"  type="com.song.vhr.model.Employeeremove">
+        <association property="employee" javaType="com.song.vhr.model.Employee">
+            <id column="eid" property="id"/>
+            <result column="ename" property="name"/>
+        </association>
+        <association property="department" javaType="com.song.vhr.model.Department">
+            <result column="dname" property="name"/>
+        </association>
+        <association property="jobLevel" javaType="com.song.vhr.model.JobLevel">
+            <result column="jname" property="name"/>
+        </association>
+    </resultMap>
+    <select id="getAllEmpMove" resultMap="EmpDeptJob">
+    select em.id, e.id as eid,e.`name` as ename,
+        d.`name`as dname,
+       j.`name` as jname,
+       em.afterDepId,
+       em.afterJobId,
+       em.reason,em.remark,em.removeDate from
+            department d,
+            joblevel j,
+            employee e,
+            employeeremove em
+            where
+            e.id=em.eid and
+            e.departmentId=d.id and
+            e.jobLevelId=j.id
+            <if test="keywords != null and keywords != ''">
+                and e.name like concat('%',#{keywords},'%')
+            </if>
+             ORDER BY em.removeDate  desc
+    </select>
+</mapper>
