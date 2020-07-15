@@ -34,7 +34,7 @@ public class MailReceiver {
     TemplateEngine templateEngine;
 
     @RabbitListener(queues = "song.mail.welcome")
-    public void hander(Employee employee){
+    public void handler(Employee employee){
         logger.info(employee.toString());
         System.out.println("======");
         //收到消息，发送邮件
